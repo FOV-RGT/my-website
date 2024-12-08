@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WallPaper</title>
+    <link rel="icon" href="https://jsd.onmicrosoft.cn/gh/FOV-RGT/recources@main/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="WallP-styles.css">
+</head>
+<body>
+    <!-- 预加载页面模块 -->
+    <div class="preloader-background"></div>
+    <div class="preloader-wrapper" style="left:0%;">
+        <div class="preloader-block"></div>
+    </div>
+    <div class="preloader-wrapper" style="left:20%;">
+        <div class="preloader-block"></div>
+    </div>
+    <div class="preloader-wrapper" style="left:40%;">
+        <div class="preloader-block"></div>
+    </div>
+    <div class="preloader-wrapper" style="left:60%;">
+        <div class="preloader-block"></div>
+    </div>
+    <div class="preloader-wrapper" style="left:80%;">
+        <div class="preloader-block"></div>
+    </div>
+    <div class="preloader-textcontainer">
+        <div class="preloader-text1">
+            <span class="BanGDream" style="display: inline-block;">迷うことを迷わない</span>
+        </div>
+        <div class="preloader-text2">
+            <span class="MyGO" style="display: inline-block;">BanG Dream! It's MyGO!!!!!</span>
+        </div>
+    </div>
+    <img src="https://jsd.onmicrosoft.cn/gh/FOV-RGT/recources@main/img/Polaris2.png" id="Polaris" class="imgPol">
+    <audio id="MusicPlayer" src=""></audio>
+    <!-- 音乐播放器 -->
+    <div class="player-warp">
+        <div class="hide-box">
+            <i class="fa-solid fa-angles-right"></i>
+        </div>
+        <div class="img-container">
+            <img class="imgA" src="https://jsd.onmicrosoft.cn/gh/FOV-RGT/recources@main/img/96831600_p18-done.png" alt="这是白子，她很可爱" title="这是白子，她很可爱">
+            <img class="imgB" src="https://jsd.onmicrosoft.cn/gh/FOV-RGT/recources@main/img/96831600_p19-done.png" alt="这是白子，她很可爱" title="这是白子，她很可爱">
+        </div>
+        <!-- 歌曲信息卡片 -->
+        <div class="player-info">
+            <div class="info">
+                <div class="name" style="font-size: 15px;"></div>
+                <div class="singer" style="font-size: 13px;"></div>
+                <!-- 进度条 -->
+                <div class="music_progress">
+                    <div class="music_progress_top">
+                        <span class="current-time" style="user-select: none;font-size: 12px;">00:00</span>
+                        <span class="time" style="user-select: none;font-size: 12px;">00:00</span>
+                    </div>
+                    <div class="music_progress_bar">
+                        <div class="music_progress_line">
+                            <div class="music_progress_handle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 音乐控制器 -->
+        <div class="player-control">
+            <!-- 封面唱片 -->
+            <div class="cover">
+                <img src="" id="Playerimg">
+            </div>
+            <!-- 控制按钮 -->
+            <div class="controlA">
+                <i id="prevBtn" class="fa-solid fa-backward"></i>
+                <i id="playBtn" class="fa fa-play"></i>
+                <i id="nextBtn" class="fa-solid fa-forward"></i>
+                <i id="openList" class="fa fa-reorder"></i>
+            </div>
+            <div class="control-bottom">
+                <div class="controlB">
+                    <div class="PlaybackOrderControl">
+                        <span id="repeat">1</span>
+                        <i id="playorder" class="fa-solid fa-repeat"></i>
+                    </div>
+                    <div class="heart">
+                    <i id="heart" class="fa-regular fa-heart"></i>
+                    </div>
+                    <div class="volume">
+                        <i id="volumestatus" class="fa-solid fa-volume-low"></i>
+                        <div class="volume_bar">
+                            <div class="volume_line">
+                                <div class="volume_handle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框 -->
+    <div class="modal">
+        <div class="modalbackground"></div>
+        <div class="modal-box">
+            <div class="modal-box-top">
+                <div class="modal-title">当前歌单</div>
+                <div id="closeList" class="modal-close">
+                    <i class="fa fa-remove"></i>
+                </div>
+            </div>
+            <div class="modal-wrapper">
+                <ul class="music-list">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="bacimgdivleft">
+        <div id="leftswch" class="bacimgswch">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="leftswchicon" class="bacimgswchicon">
+                <path class="bacimgswchcntl" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 
+                256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160zm352-160l-160 160c-12.5 12.5-12.5 
+                32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L301.3 256 438.6 118.6c12.5-12.5 12.5-32.8 
+                0-45.3s-32.8-12.5-45.3 0z"/>
+            </svg>
+        </div>
+    </div>
+    <div class="bacimgdivright">
+        <div id="rightswch" class="bacimgswch">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="rightswchicon" class="bacimgswchicon">
+                <path class="bacimgswchcntl" d="M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 
+                256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 
+                0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 
+                45.3s32.8 12.5 45.3 0z"/>
+            </svg>
+        </div>
+    </div>
+    <div class="transitionimga"></div>
+    <div class="transitionimgb">
+        <div class="container">
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10000 100" class="containersvg" preserveAspectRatio="xMidYMid meet">
+                <line x1="-50000" y1="10" x2="60000" y2="10" id="svg1">
+            </svg> -->
+            <div class="fluttercontainer">
+                <div class="textcontainer" >
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="notfoundcontainer">
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                            <p class="successtext">Connection&nbsp;<span style="color:rgb(48,135,185);">Successful</span>&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="textcontainer" >
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="notfoundcontainer">
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                            <p class="successtext">Connection&nbsp;<span style="color:rgb(48,135,185);">Successful</span>&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="textcontainer" >
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="notfoundcontainer">
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                            <p class="successtext">Connection&nbsp;<span style="color:rgb(48,135,185);">Successful</span>&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="textcontainer" >
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="notfoundcontainer">
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                            <p class="successtext">Connection&nbsp;<span style="color:rgb(48,135,185);">Successful</span>&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="textcontainer" >
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="notfoundcontainer">
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                            <p class="successtext">Connection&nbsp;<span style="color:rgb(48,135,185);">Successful</span>&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="textcontainer" >
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="notfoundcontainer">
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                            <p class="successtext">Connection&nbsp;<span style="color:rgb(48,135,185);">Successful</span>&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="textcontainer" >
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="notfoundcontainer">
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                            <p class="successtext">Connection&nbsp;<span style="color:rgb(48,135,185);">Successful</span>&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="textcontainer" >
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="notfoundcontainer">
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                            <p class="successtext">Connection&nbsp;<span style="color:rgb(48,135,185);">Successful</span>&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="textcontainer" >
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="notfoundcontainer">
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                            <p class="successtext">Connection&nbsp;<span style="color:rgb(48,135,185);">Successful</span>&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="textcontainer" >
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="notfoundcontainer">
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                            <p class="successtext">Connection&nbsp;<span style="color:rgb(48,135,185);">Successful</span>&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="textcontainer" >
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="fluttertext">
+                        <span class="a">VISION</span>&nbsp;<span class="b">FIRST</span>
+                    </div>
+                    <div class="notfoundcontainer">
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                            <p class="successtext">Connection&nbsp;<span style="color:rgb(48,135,185);">Successful</span>&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                        <div class="notfound">
+                            <p class="notfoundtextA"><span style="color:rgb(48,135,185);">404</span>&nbsp;NOT&nbsp;FOUND&nbsp;</p>
+                            <p class="notfoundtextB"><span style="color:rgb(48,135,185);">UNKNOWN</span>&nbsp;ERROR&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10000 100" class="containersvg" preserveAspectRatio="xMidYMid meet">
+                <line x1="-50000" y1="90" x2="60000" y2="90" id="svg2">
+            </svg> -->
+        </div>
+    </div>
+</body>
+<script src="WallP-script.js"></script>
+<script src="https://kit.fontawesome.com/c2f34cbb4f.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/EasePack.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
+</html>
